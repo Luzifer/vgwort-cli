@@ -6,6 +6,8 @@
 # * Get litepiesql from http://www.kipdola.be/en/blog/skerit/131-introducing-litepiesql-python-sqlite
 #   and put it into your python path (most likely next to this script)
 ###
+# Usage: Ask for help using 'vgwort.py -h'
+###
 # "THE COFFEE-WARE LICENSE" (Revision 42):
 # <knut@ahlers.me> wrote this file. As long as you retain this notice you
 # can do whatever you want with this stuff. If we meet some day, and you think
