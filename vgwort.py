@@ -24,7 +24,7 @@ def main():
   parser.add_argument('--refresh-used-marks', help='Scans sitemap.xml for articles using counter marks')
   args = parser.parse_args()
 
-  vgw = VGWort(os.path.expanduser('~/.vgwort/marks.db'))
+  vgw = VGWort(os.path.expanduser('~/.vgwort.db'))
 
   if args.add_marks:
     vgw.add_marks_from_csv(args.add_marks)
