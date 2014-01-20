@@ -19,9 +19,10 @@ from BeautifulSoup import BeautifulSoup
 
 def main():
   parser = argparse.ArgumentParser(description = 'Local management of VGWort counter marks')
-  parser.add_argument('--add-marks', help='Parse csv export of counter marks')
+  parser.add_argument('--add-marks', help='Parse csv export of counter marks', metavar='<CSV Document>')
   parser.add_argument('--get-unused', action='store_true', help='Get one unused counter mark')
-  parser.add_argument('--refresh-used-marks', help='Scans sitemap.xml for articles using counter marks')
+  parser.add_argument('--refresh-used-marks', help='Scans sitemap.xml for articles using counter marks', metavar='<URL to sitemap.xml>')
+  parser.add_argument('--get-url-for-mark', help='Displays found URL for given counter mark', metavar='[mark, [...]]', nargs='*')
   args = parser.parse_args()
 
   vgw = VGWort(os.path.expanduser('~/.vgwort.db'))
@@ -34,6 +35,9 @@ def main():
 
   if args.refresh_used_marks:
     vgw.refresh_used_marks(args.refresh_used_marks)
+
+  if args.get_url_for_mark is not None:
+    vgw.get_url_for_mark(args.get_url_for_mark)
 
 def progressbar(it, prefix = "", size = 60):
   count = len(it)
@@ -101,6 +105,19 @@ class VGWort:
       if len(matches) == 0:
         continue
       self.database.update('marks', {'BlogURL': url.loc.text, 'FoundOn': 'now()'}, 'MarkerURL = "%s"' % matches[0])
+
+  def get_url_for_mark(self, marks):
+    data = []
+    if len(marks) == 0:
+      data = self.database.query('SELECT * FROM marks WHERE BlogURL IS NOT NULL')
+    else:
+      for mark in marks:
+        d = self.database.query("SELECT * FROM marks WHERE MarkerURL LIKE '%%%s%%' OR PrivateKey = '%s'" % (mark, mark))
+        for i in d:
+          data.append(i)
+
+    for d in data:
+      print '%s => %s' % (d['privatekey'], d['blogurl'])
 
 
 if __name__ == '__main__':
