@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 ###
 # Requirements:
@@ -26,18 +26,26 @@ def main():
   args = parser.parse_args()
 
   vgw = VGWort(os.path.expanduser('~/.vgwort.db'))
+  anyactiontaken = False
 
-  if args.add_marks:
+  if args.add_marks is not None:
     vgw.add_marks_from_csv(args.add_marks)
+    anyactiontaken = True
 
   if args.get_unused:
     vgw.get_unused_mark()
+    anyactiontaken = True
 
-  if args.refresh_used_marks:
+  if args.refresh_used_marks is not None:
     vgw.refresh_used_marks(args.refresh_used_marks)
+    anyactiontaken = True
 
   if args.get_url_for_mark is not None:
     vgw.get_url_for_mark(args.get_url_for_mark)
+    anyactiontaken = True
+
+  if not anyactiontaken:
+    parser.print_help()
 
 def progressbar(it, prefix = "", size = 60):
   count = len(it)
