@@ -1,3 +1,5 @@
+[![Analytics](https://ga-beacon.appspot.com/UA-13186236-6/vgwort-cli/readme)](https://github.com/igrigorik/ga-beacon)
+
 # Luzifer / vgwort-cli
 
 This scripts helps you to manage your VGWort counter marks by using a little sqlite3 database placed into your home directory. It is able to import the CSV file from VGWort, search an unused mark for you and scan your blog using the sitemap.xml for used counter marks.
