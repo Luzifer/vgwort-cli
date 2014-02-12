@@ -9,10 +9,10 @@ This scripts helps you to manage your VGWort counter marks by using a little sql
 ## Usage
 
 ```
-$ ./vgwort.py -h
-usage: vgwort.py [-h] [--add-marks <CSV Document>] [--get-unused]
-                 [--refresh-used-marks <URL to sitemap.xml>]
-                 [--get-url-for-mark [[mark, [...]] [[mark, [...]] ...]]]
+$ ./vgwort-cli -h
+usage: vgwort-cli [-h] [--add-marks <CSV Document>] [--get-unused]
+                  [--refresh-used-marks <URL to sitemap.xml>]
+                  [--get-url-for-mark [[mark, [...]] [[mark, [...]] ...]]]
 
 Local management of VGWort counter marks
 
